@@ -1,7 +1,11 @@
-import { Alert, Button, Image, StyleSheet, Text, View } from 'react-native'
+import { Alert, Image, StyleSheet, Text, View } from 'react-native'
 import React, { Component, useState } from 'react'
 import { launchCameraAsync, PermissionStatus, useCameraPermissions } from 'expo-image-picker'
 import { Colors } from '../../constant/color'
+import OutlinedButton from '../UI/OutlinedButton'
+
+import Seacrh_Icon from '../../assets/icons/Search.svg'
+import Camera_Icon from '../../assets/icons/camera.svg'
 
 function ImagePicker() {
 
@@ -59,7 +63,7 @@ function ImagePicker() {
                
             </View>
 
-            <Button title='Take Image' onPress={takeImage} />
+            <OutlinedButton onPress={takeImage} icon={<Camera_Icon  width={18} height={22} fill={Colors.primary500} />}>Take Image</OutlinedButton>
 
         </View>
     )

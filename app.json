@@ -1,13 +1,16 @@
 {
   "name": "favourite_place",
   "displayName": "favourite_place",
-
   "plugins": [
-      [
-        "expo-image-picker",
-        {
-          "cameraPermission": "The app accesses your photos to let you share them with your friends."
-        }
-      ]
+    [
+      "expo-image-picker",
+      {
+        "cameraPermission": "The app accesses your photos to let you share them with your friends."
+      },
+      "expo-location",
+      {
+        "locationAlwaysAndWhenInUsePermission": "Allow $(PRODUCT_NAME) to use your location."
+      }
     ]
+  ]
 }
