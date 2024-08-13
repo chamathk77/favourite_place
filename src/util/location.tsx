@@ -1,4 +1,4 @@
- const GOOGLE_MAPS_API_KEY= "AIzaSyBXN-ldzKjT5IFcN7sWcMJbEyhi9B1NK1w"
+ export const GOOGLE_MAPS_API_KEY= "AIzaSyBXN-ldzKjT5IFcN7sWcMJbEyhi9B1NK1w"
 
 
 export function getMapPreviewUrl(lat: number, lng: number) {

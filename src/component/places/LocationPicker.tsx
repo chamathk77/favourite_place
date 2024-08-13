@@ -8,10 +8,14 @@ import Map_Icon from '../../assets/icons/map.svg'
 import Location_Icon from '../../assets/icons/location.svg'
 import { Colors } from '../../constant/color'
 import { getMapPreviewUrl } from '../../util/location'
+import { useNavigation } from '@react-navigation/native'
 
 
 
 function LocationPicker() {
+
+    const navigation =useNavigation()
+
     const [locationPicked, setLocationPicked] = useState()
 
     const [locationPermissionInfo, requestPermission] = useForegroundPermissions()
@@ -51,6 +55,7 @@ function LocationPicker() {
     }
     function pickOnMapHandler() {
         console.log("pickOnMapHandler")
+        navigation.navigate("Map")
 
     }
 
