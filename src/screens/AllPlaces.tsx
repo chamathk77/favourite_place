@@ -8,7 +8,7 @@ import PlacesList from '../component/places/placesList'
 export function AllPlaces() {
 
   return (
-    <PlacesList places={[]} />
+    <PlacesList />
 
 
   )

@@ -1,5 +1,5 @@
 import { Alert, StyleSheet, Text, View, Image } from 'react-native'
-import React, { Component, useState } from 'react'
+import React, { Component, useEffect, useState } from 'react'
 import OutlinedButton from '../UI/OutlinedButton'
 
 import { getCurrentPositionAsync, useForegroundPermissions, PermissionStatus } from 'expo-location'
@@ -8,17 +8,46 @@ import Map_Icon from '../../assets/icons/map.svg'
 import Location_Icon from '../../assets/icons/location.svg'
 import { Colors } from '../../constant/color'
 import { getMapPreviewUrl } from '../../util/location'
-import { useNavigation } from '@react-navigation/native'
+import { useIsFocused, useNavigation, useRoute } from '@react-navigation/native'
 
 
 
 function LocationPicker() {
-
-    const navigation =useNavigation()
-
     const [locationPicked, setLocationPicked] = useState()
 
+    const navigation = useNavigation()
+    const route = useRoute()
+    const isFocused = useIsFocused()
+
+
+
     const [locationPermissionInfo, requestPermission] = useForegroundPermissions()
+
+
+
+
+
+    useEffect(() => {
+
+        console.log("selected data ------------------------->>>>>>>>>>>>>>>>>>>> , lat   ", route.params?.Picked_Lat)
+        console.log("selected data ------------------------->>>>>>>>>>>>>>>>>>>>  lng  ", route.params?.Picked_Lng)
+
+        if (isFocused && route.params) {
+
+            console.log(" location picker  is focused------------------------->>>>>>>>>>>>>>>>>>>>  lng  ", route.params?.Picked_Lng)
+
+
+            const mapPickedLocation: any =
+            {
+                lat: route.params.Picked_Lat,
+                lng: route.params.Picked_Lng
+            }
+
+            setLocationPicked(mapPickedLocation)
+        }
+
+
+    }, [route, isFocused])
 
     async function verifyPermissions() {
 

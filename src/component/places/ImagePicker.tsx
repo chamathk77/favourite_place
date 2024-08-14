@@ -13,11 +13,18 @@ function ImagePicker() {
     const [permissionInfo, requestPermission] = useCameraPermissions()
 
     async function verifyPermissions() {
+
         if (permissionInfo.status === PermissionStatus.UNDETERMINED) {
             const permissionResponse = await requestPermission()
+            console.log("00000000000000000000000000000",permissionResponse)
+            console.log("888888888888888888888888888888",PermissionStatus)
             return permissionResponse.granted
         }
         if (permissionInfo.status === PermissionStatus.DENIED) {
+            console.log("65656565656565656565656",PermissionStatus)
+            console.log("")
+
+
             Alert.alert('Insufficient permissions!', 'You need to grant camera permissions to use this app.')
             return false
         }
@@ -26,6 +33,8 @@ function ImagePicker() {
 
     async function takeImage() {
         const hasPermission = await verifyPermissions()
+
+        console.log("2333333333333333333333333333333",hasPermission)
 
         if (hasPermission === false) {
             return
@@ -55,7 +64,7 @@ function ImagePicker() {
 
     return (
         <View>
-            <Text >ImagePicker</Text>
+            <Text style={{ textAlign: 'center', fontWeight: 'bold', fontSize: 20 ,color:Colors.primary500}} >ImagePicker</Text>
 
             <View style={styles.imagePreview}>
 

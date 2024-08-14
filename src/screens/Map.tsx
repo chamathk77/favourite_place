@@ -18,8 +18,8 @@ function Map({ navigation }: any) {
     }
 
     function select_location_handler(event: any) {
-        console.log("select_location_handler----------------------->>>>>>>>>>>>>>>>>>>>")
-        console.log(event)
+        console.log("select_location_handler----------------------->>>>>>>>>>>>>>>>>>>>" ,event.nativeEvent)
+        
 
         const lat: any = event.nativeEvent.coordinate.latitude
         const lng: any = event.nativeEvent.coordinate.longitude
@@ -29,7 +29,7 @@ function Map({ navigation }: any) {
 
     const save_location_handler = useCallback(()=> {
         console.log("save_location_handler----------------------->>>>>>>>>>>>>>>>>>>>")
-        console.log(selected_location)
+        console.log("66666666666666666666666666666666-------------",selected_location)
 
         if (!selected_location) {
 
@@ -70,7 +70,7 @@ function Map({ navigation }: any) {
                 (
 
                     <Marker
-                        title='Pick Location'
+                        title='Picked Location'
 
                         coordinate={{
                             latitude: selected_location.lat,
