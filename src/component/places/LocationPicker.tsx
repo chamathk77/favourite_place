@@ -7,12 +7,12 @@ import { getCurrentPositionAsync, useForegroundPermissions, PermissionStatus } f
 import Map_Icon from '../../assets/icons/map.svg'
 import Location_Icon from '../../assets/icons/location.svg'
 import { Colors } from '../../constant/color'
-import { getMapPreviewUrl } from '../../util/location'
+import { get_address, getMapPreviewUrl } from '../../util/location'
 import { useIsFocused, useNavigation, useRoute } from '@react-navigation/native'
 
 
 
-function LocationPicker() {
+function LocationPicker({onLocationPicked}:any) {
     const [locationPicked, setLocationPicked] = useState()
 
     const navigation = useNavigation()
@@ -44,10 +44,31 @@ function LocationPicker() {
             }
 
             setLocationPicked(mapPickedLocation)
+
+
+       
         }
 
 
     }, [route, isFocused])
+
+    useEffect(() => {
+
+        async function handlelocation(){
+
+            if(locationPicked ){
+            console.log("GET ADDRESS CALLED ----------------000000000000000000000000000000000000000",)
+               const address =await get_address(locationPicked.lat,locationPicked.lng)
+    
+                onLocationPicked(address)
+            }
+        }
+
+        handlelocation()
+
+        
+        
+    },[locationPicked]) 
 
     async function verifyPermissions() {
 

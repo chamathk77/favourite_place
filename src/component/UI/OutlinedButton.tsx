@@ -12,7 +12,7 @@ function OutlinedButton({ onPress, icon, children }: any) {
             {icon && <View style={styles.icon}>{icon}</View>}
 
             <Text style={styles.text}>{children}</Text>
-            
+
         </TouchableOpacity>
     )
 
@@ -34,10 +34,12 @@ const styles = StyleSheet.create({
         borderRadius: 4,
         borderColor: Colors.primary500
     },
-    icon: {
-        marginRight: 6
+    icon:
+    {
+    marginRight: 6
     },
-    text: {
+    text:
+    {
         color: Colors.primary500
     }
 

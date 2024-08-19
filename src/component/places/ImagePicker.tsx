@@ -7,7 +7,7 @@ import OutlinedButton from '../UI/OutlinedButton'
 import Seacrh_Icon from '../../assets/icons/Search.svg'
 import Camera_Icon from '../../assets/icons/camera.svg'
 
-function ImagePicker() {
+function ImagePicker({onImageTaken}:any) {
 
     const [pickedImage, setPickedImage] = useState<any>("")
     const [permissionInfo, requestPermission] = useCameraPermissions()
@@ -45,12 +45,16 @@ function ImagePicker() {
             // allowsEditing:true,
             aspect: [9, 16],
             quality: 1,
+            cameraType: 'front',
+           
             // allowsEditing:true,
 
 
 
         })
         setPickedImage(image.assets[0].uri)
+        onImageTaken(image.assets[0].uri)
+        
         console.log("------------------------------------------------------->>>>>>>>>>>>>>>>>>>>>>",image)
         console.log("------------------------------------------------------->>>>>>>>>>>>>>>>>>>>>>",image.assets[0].uri)
     }

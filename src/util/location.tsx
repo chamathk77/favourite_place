@@ -8,3 +8,28 @@ export function getMapPreviewUrl(lat: number, lng: number) {
 
     return imagePreviewUrl
 }
+
+export async function get_address(lat: number, lng: number) {
+
+    try {
+
+        console.log("lat,lng----------->>>>>>>>>>>>>>>>>>",lat,lng)
+        const url='https://maps.googleapis.com/maps/api/geocode/json?latlng='+lat+','+lng+'&key='+GOOGLE_MAPS_API_KEY
+        const response=await fetch(url)
+        console.log("-------------------->>>>>>>>>>>>>>>>>",response)
+
+        const data=await response.json()
+        const address=data.results[0].formatted_address
+        console.log("address----------->>>>>>>>>>>>>>>>>>",address)
+
+        return address
+    
+    } catch (error) {
+        console.log("error----------->>>>>>>>>>>>>>>>>>",error)
+        
+    }
+
+
+
+  
+}
