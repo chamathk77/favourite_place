@@ -1,47 +1,49 @@
-import { ScrollView, StyleSheet, Text, TextInput, View } from 'react-native'
-import React, { Component, useCallback, useState } from 'react'
-import { Colors } from '../../constant/color'
-import ImagePicker from './ImagePicker'
-import LocationPicker from './LocationPicker'
-import Button from '../UI/button'
+import {ScrollView, StyleSheet, Text, TextInput, View} from 'react-native';
+import React, {Component, useCallback, useState} from 'react';
+import {Colors} from '../../constant/color';
+import ImagePicker from './ImagePicker';
+import LocationPicker from './LocationPicker';
+import Button from '../UI/button';
+import {place} from '../model/place';
 
-function PlaceForm() {
-
-  const [enteredTitle, setEnteredTitle] = useState('')
-  const [selectedImage, setSelectedImage] = useState('')
-  const [pickedLocation, setPickedLocation] = useState()
+function PlaceForm({onCreatePlace}: any) {
+  const [enteredTitle, setEnteredTitle] = useState('');
+  const [selectedImage, setSelectedImage] = useState('');
+  const [pickedLocation, setPickedLocation] = useState();
 
   function Change_title_handler(enteredTitle: string) {
-
-    setEnteredTitle(enteredTitle)
-
+    setEnteredTitle(enteredTitle);
   }
-
-
 
   function onImageTaken(imagePath: string) {
-    setSelectedImage(imagePath)
-
+    setSelectedImage(imagePath);
   }
   const onLocationPicked = useCallback((location: any) => {
-
-    setPickedLocation(location)
-  }, [])
+    console.log(
+      'onLocationPicked -------------->>>>>>>>0000000000000000000',
+      location,
+    );
+    setPickedLocation(location);
+  }, []);
 
   function saveplace_handler() {
-    console.log("title", enteredTitle)
-    console.log("image", selectedImage)
-    console.log("location", pickedLocation)
+    console.log('title', enteredTitle);
+    console.log('image', selectedImage);
+    console.log('location', pickedLocation);
+
+    const placeData = new place(enteredTitle, selectedImage, pickedLocation);
+    onCreatePlace(placeData);
   }
 
   return (
     <ScrollView style={styles.form}>
-      <View >
+      <View>
         <Text style={styles.label}>Title</Text>
         <TextInput
           style={styles.input}
           onChangeText={Change_title_handler}
-          value={enteredTitle} />
+          value={enteredTitle}
+        />
       </View>
 
       <ImagePicker onImageTaken={onImageTaken} />
@@ -49,25 +51,23 @@ function PlaceForm() {
       <LocationPicker onLocationPicked={onLocationPicked} />
 
       <Button onPress={saveplace_handler}>Add Place</Button>
-
     </ScrollView>
-  )
+  );
 }
 
-
-export default PlaceForm
+export default PlaceForm;
 
 const styles = StyleSheet.create({
   form: {
     flex: 1,
-
-    marginBottom: 50
+    marginHorizontal: 24,
+    marginBottom: 50,
   },
 
   label: {
     fontWeight: 'bold',
     marginBottom: 4,
-    color: Colors.primary500
+    color: Colors.primary500,
   },
   input: {
     marginVertical: 8,
@@ -76,6 +76,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     borderBottomColor: Colors.primary700,
     borderBottomWidth: 2,
-    backgroundColor: Colors.primary100
-  }
-})
+    backgroundColor: Colors.primary100,
+  },
+});

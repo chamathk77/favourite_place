@@ -15,7 +15,7 @@ function ImagePicker({onImageTaken}:any) {
     async function verifyPermissions() {
 
         if (permissionInfo.status === PermissionStatus.UNDETERMINED) {
-            const permissionResponse = await requestPermission()
+            const permissionResponse: any = await requestPermission()
             console.log("00000000000000000000000000000",permissionResponse)
             console.log("888888888888888888888888888888",PermissionStatus)
             return permissionResponse.granted
@@ -45,7 +45,7 @@ function ImagePicker({onImageTaken}:any) {
             // allowsEditing:true,
             aspect: [9, 16],
             quality: 1,
-            cameraType: 'front',
+            cameraType: "front",
            
             // allowsEditing:true,
 
