@@ -5,17 +5,26 @@ import {GOOGLE_MAPS_API_KEY} from '../util/location';
 
 import Save_icon from '../assets/icons/save.svg';
 import {Colors} from '../constant/color';
-function Map({navigation}: any) {
-  const [selected_location, set_selected_location] = useState();
+function Map({navigation, route}: any) {
+  const initialLocation = route.params && {
+    lat: route.params.initialLat,
+    lng: route.params.initialLng,
+  };
+
+  const [selected_location, set_selected_location] = useState(initialLocation);
 
   const regiom = {
-    latitude: 6.9271,
-    longitude: 79.8612,
+    latitude: initialLocation ? initialLocation.lat : 6.9271,
+    longitude: initialLocation ? initialLocation.lng : 79.8612,
     latitudeDelta: 0.0922,
     longitudeDelta: 0.0421,
   };
 
   function select_location_handler(event: any) {
+
+    if (initialLocation) {
+      return
+    }
     console.log(
       'select_location_handler----------------------->>>>>>>>>>>>>>>>>>>>',
       event.nativeEvent,
@@ -51,6 +60,10 @@ function Map({navigation}: any) {
   }, [navigation, selected_location]);
 
   useLayoutEffect(() => {
+
+    if(initialLocation){
+      return ;
+    }
     navigation.setOptions({
       headerRight: () => (
         <Save_icon
@@ -61,13 +74,17 @@ function Map({navigation}: any) {
         />
       ),
     });
-  }, [navigation, save_location_handler]);
+  }, [navigation, save_location_handler,initialLocation]);
 
   return (
     <MapView
       style={styles.map}
       initialRegion={regiom}
-      onPress={select_location_handler}>
+      onPress={select_location_handler}
+      zoomControlEnabled={true}
+      zoomEnabled={true}
+      >
+      
       {selected_location && (
         <Marker
           title="Picked Location"

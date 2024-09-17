@@ -3,17 +3,22 @@ import React, {Component} from 'react';
 import {Colors} from '../../constant/color';
 
 function PlaceItem({places, onSelect}: any) {
-    
-    console.log("777777777777777777777777",places.imageUrl)
+  console.log('777777777777777777777777', places.imageUrl);
+
+  function onPressCard() {
+    // onSelect.bind(this, places.id);
+
+    console.log('777777777777777777777777', places.id);
+
+    onSelect(places.id);
+  }
   return (
-    <TouchableOpacity style={styles.item} onPress={() => onSelect(places)}>
-   
-        <Image style={styles.image} src={places.imageUrl} />
-        <View style={styles.info}>
-          <Text style={styles.title}>{places.title} </Text>
-          <Text style={styles.address}>{places.address}</Text>
-        </View>
-  
+    <TouchableOpacity style={styles.item} onPress={onPressCard}>
+      <Image style={styles.image} src={places.image} />
+      <View style={styles.info}>
+        <Text style={styles.title}>{places.title} </Text>
+        <Text style={styles.address}>{places.address}</Text>
+      </View>
     </TouchableOpacity>
   );
 }
@@ -52,6 +57,5 @@ const styles = StyleSheet.create({
   address: {
     fontSize: 12,
     color: Colors.gray700,
-  }
-  ,
+  },
 });

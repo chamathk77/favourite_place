@@ -13,6 +13,7 @@ import Map_Screen from './src/screens/Map';
 import {init} from './src/util/database';
 import ReactLoading from 'react-loading';
 import Example from './src/component/UI/loading';
+import PlaceDetails from './src/screens/placeDetails';
 //import { Svg } from 'react-native-svg'
 
 const Stack = createNativeStackNavigator();
@@ -23,7 +24,11 @@ function App() {
   useEffect(() => {
     console.log('App Loaded -------------------------->>>>>>>>>>>>>');
 
-    const db = init()
+    const db_intialized = db();
+  }, []);
+
+  const db = async () => {
+    const db = await init()
       .then(() => {
         setDbInited(true);
       })
@@ -32,15 +37,19 @@ function App() {
       });
 
     console.log('----------------------------------<<<<<<<<<<<<<<<<<<<<', db);
-  }, []);
+    return db;
+  };
 
   if (!dbInited) {
-    <Example type={'bars'} color={'#000'} />
+    <Example type={'bars'} color={'#000'} />;
   }
 
   return (
     <>
-      <StatusBar barStyle={'dark-content'} />
+      <StatusBar
+        barStyle={'dark-content'}
+        backgroundColor={Colors.primary400}
+      />
 
       <NavigationContainer>
         <Stack.Navigator
@@ -72,6 +81,10 @@ function App() {
           />
 
           <Stack.Screen name="Map" component={Map_Screen} />
+
+          <Stack.Screen name='PlaceDetails' component={PlaceDetails}  options={{
+            title:"Loading Place Details............"
+          }}/>
         </Stack.Navigator>
       </NavigationContainer>
     </>
